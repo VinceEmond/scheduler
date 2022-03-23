@@ -3,24 +3,24 @@ import "components/InterviewerList.scss";
 import InterviewerListItem from './InterviewerListItem';
 
 const InterviewerList = (props) => {
-  const {interviewers, setInterviewer, interviewer} = props;
+  // const {interviewers, setInterviewer, interviewer} = props;
+  // const {interviewers, onChange, value} = props
 
-  const interviewListItemsArr = interviewers.map((anInterviewer) => {
-    const {id, name, avatar} = anInterviewer;
+  const interviewerListArr = props.interviewers.map((interviewer) => {
     return (
       <InterviewerListItem
-        key={ id }
-        name={ name }
-        avatar={avatar}
-        selected={ id === interviewer }
-        setInterviewer={() => setInterviewer(id)}
+        key={interviewer.id}
+        name={interviewer.name}
+        avatar={interviewer.avatar}
+        selected={interviewer.id === props.value}
+        setInterviewer={() => props.onChange(interviewer.id)}
       />);
   });
 
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
-      <ul className="interviewers__list">{ interviewListItemsArr }</ul>
+      <ul className="interviewers__list">{ interviewerListArr }</ul>
     </section>
   );
 };
