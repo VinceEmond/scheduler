@@ -65,7 +65,7 @@ export default function Application(props) {
 
   const [day, setDay] = useState('Monday');
   
-  const appointmentsList = Object.values(appointments).map((appointment) => {
+  const appointmentsArr = Object.values(appointments).map((appointment) => {
     if (appointment.interview){
       return (
         <Appointment 
@@ -106,7 +106,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {appointmentsList}
+        {appointmentsArr}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
