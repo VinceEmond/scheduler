@@ -3,95 +3,40 @@ import DayList from "./DayList";
 import "components/Application.scss";
 import Appointment from "./Appointment";
 import axios from "axios";
+import {getAppointmentsForDay} from "helpers/selectors";
 
-
-const appointments = {
-  "1": {
-    id: 1,
-    time: "12pm",
-  },
-  "2": {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer:{
-        id: 3,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  "3": {
-    id: 3,
-    time: "2pm",
-  },
-  "4": {
-    id: 4,
-    time: "3pm",
-    interview: {
-      student: "Archie Andrews",
-      interviewer:{
-        id: 4,
-        name: "Cohana Roy",
-        avatar: "https://i.imgur.com/FK8V841.jpg",
-      }
-    }
-  },
-  "5": {
-    id: 5,
-    time: "4pm",
-  }
-
-};
 
 const Application = (props) => {
-
-  // const [day, setDay] = useState('Monday');
-  // const [days, setDays] = useState([]);
-  
-  // const state = {
-  //   day,
-  //   days,
-  //   appointments
-  // }
 
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    // appointments: {}
+    appointments: {}
   });
 
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
   const setDay = (day) => setState({...state, day});
-  const setDays = (days) => setState(prev => ({ ...prev, days }));
 
   useEffect(()=> {
     const base = `http://localhost:8001/api`
-    axios.get(`${base}/days`)
-    .then((response) => {
-      setDays(response.data)
+
+    Promise.all([
+      axios.get(`${base}/days`), 
+      axios.get(`${base}/appointments`)
+    ]).then((all)=> {
+      setState(prev => ({...prev,
+        days: all[0].data,
+        appointments: all[1].data
+      }))
     })
   }, []);
 
-
-
-  const appointmentsArr = Object.values(appointments).map((appointment) => {
+  const appointmentsArr = dailyAppointments.map((appointment) => {
     if (appointment.interview){
-      return (
-        <Appointment 
-        key={appointment.id} 
-        {...appointment}/>
-      )
+      return (<Appointment key={appointment.id} {...appointment}/>)
     };
-
-    return (
-      <Appointment 
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-      />
-    );
-  })
+    return (<Appointment key={appointment.id} id={appointment.id} time={appointment.time}/>);
+  });
 
   return (
     <main className="layout">
