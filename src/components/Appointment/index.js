@@ -31,10 +31,10 @@ const Appointment = (props) => {
       interviewer
     };
 
-    // console.log(`I have saved student ${name} with interviewer:`, interviewer);
-    // console.log("Interview", interview);
-    props.bookInterview(props.id ,interview);
-    transition(SHOW);
+    props.bookInterview(props.id, interview)
+    .then(() => {
+      transition(SHOW)
+    });
   }
 
   return (
