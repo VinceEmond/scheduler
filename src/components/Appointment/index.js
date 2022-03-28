@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import "components/Appointment/styles.scss";
 import Header from './Header';
 import Show from './Show';
+import Status from './Status';
 import Empty from './Empty';
 import Form from './Form';
 import useVisualMode from 'Hooks/useVisualMode';
@@ -11,6 +12,7 @@ import useVisualMode from 'Hooks/useVisualMode';
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";  
+const SAVING = "SAVING";
 
 const Appointment = (props) => {
   // Props:
@@ -30,6 +32,7 @@ const Appointment = (props) => {
       student: name,
       interviewer
     };
+    transition(SAVING);
 
     props.bookInterview(props.id, interview)
     .then(() => {
@@ -55,6 +58,7 @@ const Appointment = (props) => {
           onCancel={back}
           onSave={save}
           />}
+        {mode === SAVING && <Status/>}
       </article>
     </Fragment>
   );
