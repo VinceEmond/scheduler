@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Button from 'components/Button';
 import InterviewerList from 'components/InterviewerList';
-import { resolvePreset } from '@babel/core';
 
 const Form = (props) => {
   // Props: 
@@ -14,12 +13,8 @@ const Form = (props) => {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
-  // const setStudent = () => {
-  // };
-
-  // const setInterviewer = () => {
-
-  // };
+  console.log(props.interviewers);
+  console.log(props.interviewers);
 
   const reset = () => {
     setStudent("");
@@ -35,8 +30,6 @@ const Form = (props) => {
     event.preventDefault();
   }
 
-  // <InterviewerList interviewers={props.interviewers} selectedInterviewer={interviewer} setInterviewer={setInterviewer}/>
-
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -51,14 +44,11 @@ const Form = (props) => {
           />
         </form>
 
-
         <InterviewerList 
           interviewers={props.interviewers}
           onChange={setInterviewer}
           value={interviewer}
         />
-
-
 
       </section>
       <section className="appointment__card-right">

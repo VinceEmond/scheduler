@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useState} from "react";
 
 const useVisualMode = (initialMode) => {
   const [mode, setMode] = useState(initialMode);
@@ -20,4 +20,4 @@ const useVisualMode = (initialMode) => {
   return {mode, transition, back};
 };
 
-export { useVisualMode };
+export default useVisualMode

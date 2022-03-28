@@ -3,7 +3,7 @@ import DayList from "./DayList";
 import "components/Application.scss";
 import Appointment from "./Appointment";
 import axios from "axios";
-import {getAppointmentsForDay, getInterview} from "helpers/selectors";
+import {getAppointmentsForDay, getInterviewersForDay, getInterview} from "helpers/selectors";
 
 
 const Application = (props) => {
@@ -34,11 +34,9 @@ const Application = (props) => {
   }, []);
   
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const dailyInterviewers = getInterviewersForDay(state, state.day);
+
   const schedule = dailyAppointments.map((appointment) => {
-    // if (appointment.interview){
-      // return (<Appointment key={appointment.id} {...appointment}/>)
-    // };
-    // return (<Appointment key={appointment.id} id={appointment.id} time={appointment.time}/>);
     const interview = getInterview(state, appointment.interview);
 
     return (
@@ -47,6 +45,7 @@ const Application = (props) => {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={dailyInterviewers}
       />
     );
   });
@@ -83,3 +82,24 @@ const Application = (props) => {
 
 
 export default Application;
+
+
+/*
+const schedule = dailyAppointments.map((appointment) => {
+  // if (appointment.interview){
+    // return (<Appointment key={appointment.id} {...appointment}/>)
+  // };
+  // return (<Appointment key={appointment.id} id={appointment.id} time={appointment.time}/>);
+  const interview = getInterview(state, appointment.interview);
+
+  return (
+    <Appointment
+      key={appointment.id}
+      id={appointment.id}
+      time={appointment.time}
+      interview={interview}
+    />
+  );
+});
+
+*/
