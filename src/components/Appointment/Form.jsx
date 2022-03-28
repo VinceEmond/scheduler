@@ -13,9 +13,6 @@ const Form = (props) => {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
-  console.log(props.interviewers);
-  console.log(props.interviewers);
-
   const reset = () => {
     setStudent("");
     setInterviewer(null);
@@ -29,6 +26,11 @@ const Form = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
   }
+
+  // const save = (name, interviewer) => {
+  //   console.log(`I have saved student ${name} with interviewer:`, interviewer);
+  //   // props.onSave(name, interviewer);
+  // }
 
   return (
     <main className="appointment__card appointment__card--create">
@@ -54,7 +56,7 @@ const Form = (props) => {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button> {/* your code goes here */}
-          <Button confirm onClick={props.onSave}>Save</Button> {/* your code goes here */}
+          <Button confirm onClick={()=>props.onSave(student, interviewer)}>Save</Button> {/* your code goes here */}
         </section>
       </section>
     </main>

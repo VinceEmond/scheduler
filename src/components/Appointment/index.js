@@ -10,7 +10,7 @@ import useVisualMode from 'Hooks/useVisualMode';
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
-const CREATE = "CREATE";
+const CREATE = "CREATE";  
 
 const Appointment = (props) => {
   // Props:
@@ -18,10 +18,24 @@ const Appointment = (props) => {
     // time="4pm"
     // interview={{ student: "Lydia Miller-Jones", interviewer }}
     // interviewers: array
+    // bookInterview (id, interview)
 
   const {mode, transition, back} = useVisualMode(
     props.interview ? SHOW : EMPTY
     );
+
+
+  const save = (name, interviewer) => {
+    const interview = {
+      student: name,
+      interviewer
+    };
+
+    // console.log(`I have saved student ${name} with interviewer:`, interviewer);
+    // console.log("Interview", interview);
+    props.bookInterview(props.id ,interview);
+    transition(SHOW);
+  }
 
   return (
     <Fragment>
@@ -39,6 +53,7 @@ const Appointment = (props) => {
           <Form 
           interviewers={props.interviewers}
           onCancel={back}
+          onSave={save}
           />}
       </article>
     </Fragment>
