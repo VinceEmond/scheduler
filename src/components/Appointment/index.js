@@ -5,6 +5,7 @@ import Show from './Show';
 import Status from './Status';
 import Confirm from './Confirm';
 import Empty from './Empty';
+import Error from './Error';
 import Form from './Form';
 import useVisualMode from 'Hooks/useVisualMode';
 
@@ -17,6 +18,8 @@ const SAVING = "SAVING";
 const DELETING = 'DELETING';
 const CONFIRM = 'CONFIRM';
 const EDIT = 'EDIT';
+const ERROR_SAVE = 'ERROR_SAVE';
+const ERROR_DELETE = 'ERROR_DELETE';
 
 const Appointment = (props) => {
   // Props:
@@ -30,12 +33,17 @@ const Appointment = (props) => {
     props.interview ? SHOW : EMPTY
     );
 
-  const onDelete = (id) => {
-    transition(DELETING);
+  const onDelete = () => {
+    transition(CONFIRM)
+  }
 
-    props.cancelInterview(id).then(()=> {
-      transition(EMPTY);
-    })
+  const destroy = (id) => {
+    transition(DELETING, true);
+
+    props
+    .cancelInterview(id)
+    .then(()=> transition(EMPTY))
+    .catch(error => transition(ERROR_DELETE, true));
   }
 
   const save = (name, interviewer) => {
@@ -45,10 +53,10 @@ const Appointment = (props) => {
     };
     transition(SAVING);
 
-    props.bookInterview(props.id, interview)
-    .then(() => {
-      transition(SHOW)
-    });
+    props
+    .bookInterview(props.id, interview)
+    .then(() => transition(SHOW))
+    .catch(error => transition(ERROR_SAVE, true));
   }
 
   return (
@@ -61,7 +69,7 @@ const Appointment = (props) => {
           <Show
             student={props.interview.student}
             interviewer={props.interview.interviewer}
-            onDelete={()=> transition(CONFIRM)}
+            onDelete={onDelete}
             onEdit={()=> transition(EDIT)}
           />
         )}
@@ -81,7 +89,9 @@ const Appointment = (props) => {
           />}
         {mode === SAVING && <Status message={'Saving'}/>}
         {mode === DELETING && <Status message={'Deleting'}/>}
-        {mode === CONFIRM && <Confirm onConfirm={() => onDelete(props.id)} onCancel={()=>transition(SHOW)}/>}
+        {mode === CONFIRM && <Confirm onConfirm={() => destroy(props.id)} onCancel={()=>transition(SHOW)}/>}
+        {mode === ERROR_SAVE && <Error message={'Server Error: Could not save!'} onClose={back}/>}
+        {mode === ERROR_DELETE && <Error message={'Server Error: Could not delete!'} onClose={back}/>}
       </article>
     </Fragment>
   );
