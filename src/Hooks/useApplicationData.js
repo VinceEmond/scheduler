@@ -14,7 +14,8 @@ const useApplicationData = () => {
   const setDay = (day) => setState({...state, day});
   
   useEffect(()=> {
-    const base = `http://localhost:8001/api`
+    // const base = `http://localhost:8001/api`
+    const base = 'api';
     
     Promise.all([
       axios.get(`${base}/days`), 
@@ -28,6 +29,39 @@ const useApplicationData = () => {
       }))
     })
   }, []);
+
+  const updateSpots = (state, appointments, id) => {
+
+    const interviewStateBefore = state.appointments[id].interview;
+    const interviewStateAfter = appointments[id].interview;
+    let modifier = 0;
+ 
+   // Handle Update
+   if (interviewStateBefore !== null && interviewStateAfter !== null){
+     modifier = 0;
+    }
+ 
+   // Handle Delete 
+   else if (interviewStateBefore !== null && interviewStateAfter === null){
+     modifier = 1;
+   } 
+ 
+   // Handle Create
+   else if (interviewStateBefore === null && interviewStateAfter !== null){
+     modifier = -1;
+   } 
+ 
+   const updatedDays =  state.days.map(day => {   
+       // Find the day where the appointments array includes the ID
+       if (day.appointments.includes(id)){
+         // Update the spots value with the appropriate modifier
+         return {...day, spots: day.spots + modifier}
+       }
+       return day
+     })
+ 
+   return updatedDays
+ }
 
   const cancelInterview = (id) => {
 
@@ -43,7 +77,8 @@ const useApplicationData = () => {
 
     return axios.delete(`/api/appointments/${id}`)
     .then(()=> {
-      setState({...state, appointments});
+      const days = updateSpots(state, appointments, id);
+      setState({...state, days, appointments});
     })
   }
 
@@ -60,7 +95,8 @@ const useApplicationData = () => {
 
     return axios.put(`/api/appointments/${id}`, {...appointment})
     .then(() => {
-      setState({...state, appointments});
+      const days = updateSpots(state, appointments, id);
+      setState({...state, days, appointments});
     })
   }
 
