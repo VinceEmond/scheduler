@@ -24,23 +24,19 @@ const Form = (props) => {
       setError("Student name cannot be blank");
       return;
     }
-  
+    setError("");
     props.onSave(student, interviewer);
   }
 
   const cancel = () => {
     reset();
+    setError("");
     props.onCancel();
   }
 
   const submitHandler = (event) => {
     event.preventDefault();
   }
-
-  // const save = (name, interviewer) => {
-  //   console.log(`I have saved student ${name} with interviewer:`, interviewer);
-  //   // props.onSave(name, interviewer);
-  // }
 
   return (
     <main className="appointment__card appointment__card--create">
