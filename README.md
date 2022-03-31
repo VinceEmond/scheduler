@@ -3,7 +3,8 @@
 ## Table Of Contents
 
 - [Summary](#summary)
-  - [Features](#features)
+  - [Purpose](#purpose)
+- [Features](#features)
   - [Screenshots](#screenshots)
   - [GIFs]()
 - [Getting Started](#getting-started)
@@ -13,10 +14,13 @@
     - [Running Storybook](#running-storybook-visual-testbed)
 - [About](#about)
   - [Frameworks and Libraries](#frameworks-and-libraries)
-  - [Purpose](#purpose)
+ 
 
 # Summary
 Interview Scheduler is a **Single-Page Application (SPA)** built using **React.js**.
+
+## Purpose
+This application was created by **[Vince Emond](https://github.com/VinceEmond)** as part of the **Lighthouse Labs' Web Development Bootcamp** curiculum. Its purpose was to practice creating React components, managing state based user interfaces, unit testing, integration testing, and end-to-end testing.
 
 ## Features
 Users can:
@@ -71,11 +75,11 @@ npm run storybook
 ```
 
 ### Running Cypress Test Environment & Seed Data
-- From the scheduler-api (server) directory: 
+- From the [scheduler-api (server)](https://github.com/lighthouse-labs/scheduler-api) directory: 
     ```sh
     npm run test:server
     ```
-- From the root of our Interview Scheduler client directory:
+- From the root of the Interview Scheduler client directory:
     ```sh
     npm run start:test
     npm run cypress
@@ -104,6 +108,3 @@ npm run storybook
 - Storybook
 - Cypress
 
-## Purpose
-
-This application was created by **[Vince Emond](https://github.com/VinceEmond)** as part of the **Lighthouse Labs' Web Development Bootcamp** curiculum. Its purpose was to practice creating React components, managing state based user interfaces, unit testing, integration testing, and end-to-end testing.
