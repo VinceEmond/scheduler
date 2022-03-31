@@ -18,7 +18,7 @@ const Application = (props) => {
   const dailyInterviewers = getInterviewersForDay(state, state.day);
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
-  const schedule = dailyAppointments.map((appointment) => {
+  const appointmentsListArr = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 
     return (
@@ -57,33 +57,11 @@ const Application = (props) => {
         />
       </section>
       <section className="schedule">
-        {schedule}
+        {appointmentsListArr}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
 }
 
-
 export default Application;
-
-
-/*
-const schedule = dailyAppointments.map((appointment) => {
-  // if (appointment.interview){
-    // return (<Appointment key={appointment.id} {...appointment}/>)
-  // };
-  // return (<Appointment key={appointment.id} id={appointment.id} time={appointment.time}/>);
-  const interview = getInterview(state, appointment.interview);
-
-  return (
-    <Appointment
-      key={appointment.id}
-      id={appointment.id}
-      time={appointment.time}
-      interview={interview}
-    />
-  );
-});
-
-*/

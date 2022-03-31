@@ -9,8 +9,6 @@ import Error from './Error';
 import Form from './Form';
 import useVisualMode from 'Hooks/useVisualMode';
 
-
-
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";  
@@ -39,9 +37,7 @@ const Appointment = (props) => {
 
   const destroy = (id) => {
     transition(DELETING, true);
-
-    props
-    .cancelInterview(id)
+    props.cancelInterview(id)
     .then(()=> transition(EMPTY))
     .catch(error => transition(ERROR_DELETE, true));
   }
@@ -53,8 +49,7 @@ const Appointment = (props) => {
     };
     transition(SAVING);
 
-    props
-    .bookInterview(props.id, interview)
+    props.bookInterview(props.id, interview)
     .then(() => transition(SHOW))
     .catch(error => transition(ERROR_SAVE, true));
   }
@@ -64,29 +59,32 @@ const Appointment = (props) => {
       <article className="appointment">
         <Header time={props.time}></Header>
         {mode === EMPTY && 
-          <Empty onAdd={() => transition(CREATE)} />}
-        {mode === SHOW && (
+          <Empty onAdd={() => transition(CREATE)} />
+        }
+        {mode === SHOW && 
           <Show
             student={props.interview.student}
             interviewer={props.interview.interviewer}
             onDelete={onDelete}
             onEdit={()=> transition(EDIT)}
           />
-        )}
+        }
         {mode === EDIT && 
           <Form 
-          interviewers={props.interviewers}
-          onCancel={back}
-          onSave={save}
-          student={props.interview.student}
-          interviewer={props.interview.interviewer.id}
-          />}
+            interviewers={props.interviewers}
+            onCancel={back}
+            onSave={save}
+            student={props.interview.student}
+            interviewer={props.interview.interviewer.id}
+          />
+        }
         {mode === CREATE && 
           <Form 
-          interviewers={props.interviewers}
-          onCancel={back}
-          onSave={save}
-          />}
+            interviewers={props.interviewers}
+            onCancel={back}
+            onSave={save}
+          />
+        }
         {mode === SAVING && <Status message={'Saving'}/>}
         {mode === DELETING && <Status message={'Deleting'}/>}
         {mode === CONFIRM && <Confirm onConfirm={() => destroy(props.id)} onCancel={()=>transition(SHOW)}/>}

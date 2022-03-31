@@ -15,11 +15,9 @@ const DayList = (props) => {
       );
   });
   
-
   return(
     <ul>{dayListArr}</ul> 
   );
-
 };
 
 export default DayList;

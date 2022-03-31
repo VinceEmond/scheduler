@@ -3,7 +3,6 @@ import axios from "axios";
 
 
 const useApplicationData = () => {
-
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -14,7 +13,6 @@ const useApplicationData = () => {
   const setDay = (day) => setState({...state, day});
   
   useEffect(()=> {
-    // const base = `http://localhost:8001/api`
     const base = 'api';
     
     Promise.all([
@@ -31,7 +29,6 @@ const useApplicationData = () => {
   }, []);
 
   const updateSpots = (state, appointments, id) => {
-
     const interviewStateBefore = state.appointments[id].interview;
     const interviewStateAfter = appointments[id].interview;
     let modifier = 0;
@@ -64,16 +61,8 @@ const useApplicationData = () => {
  }
 
   const cancelInterview = (id) => {
-
-    const appointment = {
-      ...state.appointments[id],
-      interview: null 
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
+    const appointment = {...state.appointments[id], interview: null};
+    const appointments = {...state.appointments,[id]: appointment};
 
     return axios.delete(`/api/appointments/${id}`)
     .then(()=> {
@@ -83,15 +72,8 @@ const useApplicationData = () => {
   }
 
   const bookInterview = (id, interview) => {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
+    const appointment = {...state.appointments[id], interview: { ...interview }};
+    const appointments = {...state.appointments,[id]: appointment};
 
     return axios.put(`/api/appointments/${id}`, {...appointment})
     .then(() => {
@@ -99,8 +81,6 @@ const useApplicationData = () => {
       setState({...state, days, appointments});
     })
   }
-
-
 
   return {state, setDay, bookInterview, cancelInterview}
 };

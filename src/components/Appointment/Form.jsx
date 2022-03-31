@@ -63,8 +63,8 @@ const Form = (props) => {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={cancel}>Cancel</Button> {/* your code goes here */}
-          <Button confirm onClick={validate}>Save</Button> {/* your code goes here */}
+          <Button danger onClick={cancel}>Cancel</Button>
+          <Button confirm onClick={validate}>Save</Button>
         </section>
       </section>
     </main>
