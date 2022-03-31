@@ -37,15 +37,13 @@ Users can:
 ![Create Appointment](./docs/images/Create-Appointment.gif)
 
 ### Edit Appointment
-![Edit Appointment](https://github.com/VinceEmond/wiki_map/blob/main/public/images/
-Github%20Readme/Folder_Animations.gif?raw=true)
+![Edit Appointment](./docs/imagesEdit-Appointment.gif)
 
 ### Delete Appointment
-![Delete Appointment](https://github.com/VinceEmond/wiki_map/blob/main/public/images/
-Github%20Readme/Folder_Animations.gif?raw=true)
+![Delete Appointment](./docs/images/Delete-Appointment.gif)
 
 ### Cypress Testing
-![Cypress Testing]
+![Cypress Testing](/docs/images/Cypress-Appointment-Testing.gif)
 
 
 # Getting Started
