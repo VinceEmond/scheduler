@@ -3,13 +3,6 @@ import Button from 'components/Button';
 import InterviewerList from 'components/InterviewerList';
 
 const Form = (props) => {
-  // Props: 
-    // student:String
-    // interviewers:Array
-    // interviewer:Number
-    // onSave:Function
-    // onCancel:Function
-
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");

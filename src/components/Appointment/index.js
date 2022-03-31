@@ -20,13 +20,6 @@ const ERROR_SAVE = 'ERROR_SAVE';
 const ERROR_DELETE = 'ERROR_DELETE';
 
 const Appointment = (props) => {
-  // Props:
-    // id={1}
-    // time="4pm"
-    // interview={{ student: "Lydia Miller-Jones", interviewer }}
-    // interviewers: array
-    // bookInterview (id, interview)
-
   const {mode, transition, back} = useVisualMode(
     props.interview ? SHOW : EMPTY
     );
