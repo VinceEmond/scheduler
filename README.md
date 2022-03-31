@@ -37,7 +37,7 @@ Users can:
 ![Create Appointment](./docs/images/Create-Appointment.gif)
 
 ### Edit Appointment
-![Edit Appointment](./docs/imagesEdit-Appointment.gif)
+![Edit Appointment](./docs/images/Edit-Appointment.gif)
 
 ### Delete Appointment
 ![Delete Appointment](./docs/images/Delete-Appointment.gif)
