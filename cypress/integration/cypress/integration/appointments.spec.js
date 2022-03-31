@@ -15,7 +15,6 @@ describe("Appointments", () => {
     
     cy.contains('Monday');
     // Clicks on the "Add" button in the second appointment
-    // cy.get(':nth-child(2) > .appointment__add > .appointment__add-button')
     cy.get("[alt=Add]")
     .first()
     .click();
@@ -23,7 +22,7 @@ describe("Appointments", () => {
     // Enters their name
     // cy.get("Form").find('Input')
     cy.get("[data-testid=student-name-input]")
-    .type("Lydia Miller-Jones")
+    .type("Lydia Miller-Jones", {delay:100})
 
     // Chooses an interviewer
     cy.get('[alt="Sylvia Palmer"]')
@@ -44,7 +43,7 @@ describe("Appointments", () => {
     cy.get('[alt="Edit"]').first().click({ force: true })
     // Changes the name and interviewer
     cy.get("[data-testid=student-name-input]")
-    .clear().type('Something New')
+    .clear().type('Vince Emond', {delay:100})
 
     cy.get('[alt="Tori Malcolm"]').click()
 
@@ -53,7 +52,7 @@ describe("Appointments", () => {
     .click()
 
     // Sees the edit to the appointment
-    cy.contains(".appointment__card--show", "Something New");
+    cy.contains(".appointment__card--show", "Vince Emond");
     cy.contains(".appointment__card--show", "Tori Malcolm");
 
   });
